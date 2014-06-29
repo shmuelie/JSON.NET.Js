@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="json.net.js"></script>
+</head>
+<body>
+    <script>
+        var a = {
+            b: "1",
+            c: 2,
+            d: {
+                f: "test"
+            }
+        };
+        a.e = a.d;
+        document.writeln("a.e === a.d: " + (a.e === a.d) + "<br>");
+        var str = JsonNet.stringify(a);
+        document.writeln(str + "<br>");
+        var obj = JsonNet.parse(str);
+        document.writeln("obj.e === obj.d: " + (obj.e === obj.d) + "<br>");
+    </script>
+</body>
+</html>
