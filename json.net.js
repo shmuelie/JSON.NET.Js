@@ -4,6 +4,10 @@
     var jn = JsonNet = JsonNet || {};
     var stringify = JSON.stringify;
     var parse = JSON.parse;
+    var isArray = Array.isArray || function (object)
+    {
+        return (typeof object === "object") && (Object.prototype.toString.call(object) === "[object Array]");
+    };
 
     Array.prototype.indexOf = Array.prototype.indexOf || function (obj)
     {
@@ -35,7 +39,17 @@
                 var index = refs.indexOf(property);
                 if (index === -1)
                 {
-                    property["$id"] = refs.length.toString();
+                    if (isArray(property))
+                    {
+                        obj[key] = {
+                            "$id": refs.length.toString(),
+                            "$values": property
+                        };
+                    }
+                    else
+                    {
+                        property["$id"] = refs.length.toString();
+                    }
                     refs.push(property);
                     ref(refs, property);
                 }
@@ -67,7 +81,12 @@
                 }
                 else
                 {
-                    rebuild(refs, property);
+                    if (property["$values"])
+                    {
+                        refs[property["$id"]] = property["$values"];
+                        obj[key] = property["$values"];
+                    }
+                    rebuild(refs, obj[key]);
                 }
             }
         }

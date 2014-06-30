@@ -11,14 +11,18 @@
             c: 2,
             d: {
                 f: "test"
-            }
+            },
+            g: [1, 2, "3"]
         };
         a.e = a.d;
+        a.h = a.g;
         document.writeln("a.e === a.d: " + (a.e === a.d) + "<br>");
+        document.writeln("a.h === a.g: " + (a.h === a.g) + "<br>");
         var str = JsonNet.stringify(a);
         document.writeln(str + "<br>");
         var obj = JsonNet.parse(str);
         document.writeln("obj.e === obj.d: " + (obj.e === obj.d) + "<br>");
+        document.writeln("obj.h === obj.g: " + (obj.h === obj.g) + "<br>");
     </script>
 </body>
 </html>
