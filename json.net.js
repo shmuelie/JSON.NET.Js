@@ -92,8 +92,23 @@
         }
     }
 
+    /**
+     * Takes a object and stringifies it using JSON.NET object referencing.
+     * @param {Object} obj The object to stringify.
+     * @returns {String} JSON.NET compatible JSON string.
+     */
     jn.stringify = function (obj)
     {
+        /// <summary>
+        ///     Takes a object and stringifies it using JSON.NET object referencing.
+        /// </summary>
+        /// <param name="obj" type="Object">
+        ///     The object to stringify.
+        /// </param>
+        /// <returns type="String">
+        ///     JSON.NET compatible JSON string.
+        /// </returns>
+
         var references = [];
         references.push(obj);
         obj["$id"] = "0";
@@ -101,8 +116,23 @@
         return stringify(obj);
     };
 
+    /**
+     * Takes a JSON.NET compatible JSON string and parses it into an object.
+     * @param {String} str The JSON.NET compatible JSON string.
+     * @returns {Object} The parsed object.
+     */
     jn.parse = function (str)
     {
+        /// <summary>
+        ///     Takes a JSON.NET compatible JSON string and parses it into an object.
+        /// </summary>
+        /// <param name="str" type="String">
+        ///     The JSON.NET compatible JSON string.
+        /// </param>
+        /// <returns type="Object" />
+        ///     The parsed object.
+        /// </returns>
+
         var references = {};
         var obj = parse(str);
         rebuild(references, obj);
