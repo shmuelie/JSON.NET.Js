@@ -9,7 +9,7 @@
         return (typeof object === "object") && (Object.prototype.toString.call(object) === "[object Array]");
     };
 
-    Array.prototype.indexOf = Array.prototype.indexOf || function (obj)
+    var indexOf = Array.prototype.indexOf || function (obj)
     {
         var length = this.length;
         for (var i = 0; i < length; i++)
@@ -36,7 +36,7 @@
             var property = obj[key];
             if (typeof property === "object")
             {
-                var index = refs.indexOf(property);
+                var index = indexOf.call(refs, property);
                 if (index === -1)
                 {
                     if (isArray(property))
